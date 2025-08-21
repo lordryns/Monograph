@@ -21,6 +21,7 @@ export default function IndexPage() {
       .then(res => res.documents)
       .then(res => {
         res.map((item, index) => {
+          console.log(res)
           updateBooks([...books, {key: index, title: item.title, author: item.author, cover: item.cover, url: item.url, tags: item.tags}]);
         })
       })
@@ -93,7 +94,7 @@ export default function IndexPage() {
         </div>
 
         {/* Books Grid */}
-<section className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {books.map(book => (
             <BookCard 
               key={book.key} 
