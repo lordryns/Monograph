@@ -64,7 +64,7 @@ export default function BookCard(props: any) {
         </a>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes ripple {
           0% {
             transform: scale(0);
