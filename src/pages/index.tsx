@@ -93,7 +93,7 @@ export default function IndexPage() {
         </div>
 
         {/* Books Grid */}
-<section className="grid grid-cols-2 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-4 sm:gap-5">
+<section className="grid grid-cols-2 xs:grid-cols-4 sm:grid-cols-3 md:grid-cols-3 gap-4 sm:gap-3">
           {books.map(book => (
             <BookCard 
               key={book.key} 
