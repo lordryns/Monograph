@@ -4,7 +4,7 @@ export default function BookCard(props: any) {
   const [isPressed, setIsPressed] = useState(false);
   const [ripple, setRipple] = useState(false);
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (_: React.MouseEvent) => {
     // Create ripple effect
     setRipple(true);
     setTimeout(() => setRipple(false), 600);
@@ -64,7 +64,7 @@ export default function BookCard(props: any) {
         </a>
       </div>
 
-      <style jsx="true">{`
+      <style jsx>{`
         @keyframes ripple {
           0% {
             transform: scale(0);
