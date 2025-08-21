@@ -1,25 +1,11 @@
 import { useState, useEffect } from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  Input,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Image,
-  Chip,
-  Divider,
-  Link
-} from "@heroui/react";
 
 import { databases, databaseId, bookCollectionId } from "@/appwrite_client/init_client.ts"
 
 import BookCard from "@/components/bookCard.tsx";
 
 interface Book {
-  key: int,
+  key: number,
   title: string,
   author: string, 
   cover: string, 
@@ -44,7 +30,7 @@ export default function IndexPage() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [sortBy, setSortBy] = useState("Most Recent");
+  //const [sortBy, setSortBy] = useState("Most Recent");
   
     // Categories
   const categories = ["All", "Political", "Science Fiction", "Mystery", "Biography", "History", "Technology", "Philosophy"];

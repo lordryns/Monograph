@@ -1,4 +1,4 @@
-export default function BookCard(props) {
+export default function BookCard(props: any) {
   return (
     <div className="bg-white rounded-lg overflow-hidden group shadow-sm hover:shadow-md transition-shadow">
       <div className="h-72 overflow-hidden bg-gray-50 rounded-t-lg">
