@@ -93,14 +93,16 @@ export default function IndexPage() {
         </div>
 
         {/* Books Grid */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+<section className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-4 sm:gap-5">
           {books.map(book => (
-              <BookCard key={book.key} 
-                title={book.title}
-                cover={book.cover}
-                author={book.author}
-                download_link={book.url} />
-                ))}
+            <BookCard 
+              key={book.key} 
+              title={book.title}
+              cover={book.cover}
+              author={book.author}
+              download_link={book.url} 
+            />
+          ))}
         </section>
       </main>
 
