@@ -31,7 +31,7 @@ export default function BookCard(props: any) {
       addToast({
             title: "Downloading...",
             description: `Downloading ${props.title}...`,
-            timeout: 3000,
+            timeout: 4000,
             shouldShowTimeoutProgress: true,
             color: "success"
           });
