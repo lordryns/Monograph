@@ -20,10 +20,12 @@ export default function IndexPage() {
     databases.listDocuments(databaseId, bookCollectionId)
       .then(res => res.documents)
       .then(res => {
-        res.map((item, index) => {
-          console.log(res)
-          updateBooks([...books, {key: index, title: item.title, author: item.author, cover: item.cover, url: item.url, tags: item.tags}]);
+        const mappedBook = res.map((item, index) => {
+            return {key: index, title: item.title, author: item.author, cover: item.cover, url: item.url, tags: item.tags}
         })
+
+
+          updateBooks(mappedBook);
       })
       .catch(err => console.log(err));
 
