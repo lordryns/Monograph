@@ -28,6 +28,7 @@ export default function BookCard(props: any) {
       })
       .catch(err => console.log(err));
   
+    window.open(props.download_link);
       addToast({
             title: "Downloading...",
             description: `Downloading ${props.title}...`,
@@ -35,7 +36,6 @@ export default function BookCard(props: any) {
             shouldShowTimeoutProgress: true,
             color: "success"
           });
-    window.open(props.download_link);
   };
 
   return (
