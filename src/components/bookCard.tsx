@@ -27,7 +27,7 @@ export default function BookCard(props: any) {
         );
       })
       .catch(err => console.log(err));
-    window.open(props.download_url, "_blank");
+    window.open(props.download_link, "_blank");
   };
 
   return (
