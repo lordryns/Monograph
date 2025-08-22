@@ -15,8 +15,8 @@ interface Book {
 
 export default function IndexPage() {
  const [allBooks, setAllBooks] = useState<Book[]>([]);
+ const [preSearchBooks, updatePreSearchBooks] = useState<Book[]>([]);
  const [books, updateBooks] = useState<Book[]>([]);
-  const [bookTrigger, setBookTrigger] = useState(0);
   useEffect(() => {
     databases.listDocuments(databaseId, bookCollectionId)
       .then(res => res.documents)
@@ -31,7 +31,8 @@ export default function IndexPage() {
       })
       .catch(err => console.log(err));
 
-  }, [bookTrigger])
+  }, [])
+
 
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,11 +40,26 @@ export default function IndexPage() {
   //const [sortBy, setSortBy] = useState("Most Recent");
   
     // Categories
-  const categories = ["All", "Political", "Fiction", "Mystery", "Biography", "History", "Technology", "Philosophy"];
+  const categories = ["All", "Political", "Fiction", "Biography", "History", "Technology", "Philosophy"];
+
+
+  useEffect(() => {
+
+    if (searchQuery.length < 1) {
+      updateBooks(preSearchBooks);
+    } else {
+    const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    updateBooks(filteredBooks);
+    }
+
+    if (preSearchBooks.length === 0) {
+      updatePreSearchBooks(books);
+    }
+  }, [searchQuery])
 
   useEffect(() => {
     if (selectedCategory === "All") {
-      setBookTrigger(bookTrigger + 1);
+      updateBooks(allBooks);
     } else {
 
       const filteredBooks = allBooks.filter(book => Array.isArray(book.tags) && book.tags.some(tag => tag.charAt(0).toUpperCase() + tag.slice(1) === selectedCategory))
