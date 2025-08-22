@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { databases, databaseId, bookCollectionId } from "@/appwrite_client/init_client.ts"
+
 export default function BookCard(props: any) {
   const [isPressed, setIsPressed] = useState(false);
   const [ripple, setRipple] = useState(false);
@@ -8,6 +10,24 @@ export default function BookCard(props: any) {
     // Create ripple effect
     setRipple(true);
     setTimeout(() => setRipple(false), 600);
+  };
+
+  const downloadClick = () => {
+    databases.getDocument(
+    databaseId,
+    bookCollectionId, 
+    props.id
+).then(res => res.downloads)
+      .then(count => {
+        databases.updateDocument(
+          databaseId,
+          bookCollectionId, 
+          props.id,
+          {"downloads": count + 1}
+        );
+      })
+      .catch(err => console.log(err));
+    window.open(props.download_url, "_blank");
   };
 
   return (
@@ -49,19 +69,19 @@ export default function BookCard(props: any) {
         </p>
         
         {/* Apple-style Black Button */}
-        <a 
-          href={props.download_link} 
+        <button 
           className="relative overflow-hidden w-full bg-gray-900 text-white text-sm font-medium py-3.5 rounded-xl transition-all duration-300 text-center hover:bg-gray-800 active:bg-gray-950 active:scale-95"
-          onClick={(e) => e.stopPropagation()}
+          onClick={
+            (e) => {
+            e.stopPropagation(); downloadClick();} }
           style={{
             boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)"
-          }}
-        >
+          }}>
           <span className="relative z-10">Get</span>
           
           {/* Subtle hover effect */}
           <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl" />
-        </a>
+        </button>
       </div>
 
       <style>{`

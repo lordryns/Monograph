@@ -5,6 +5,7 @@ import { databases, databaseId, bookCollectionId } from "@/appwrite_client/init_
 import BookCard from "@/components/bookCard.tsx";
 
 interface Book {
+  id: number;
   key: number,
   title: string,
   author: string, 
@@ -22,7 +23,7 @@ export default function IndexPage() {
       .then(res => res.documents)
       .then(res => {
         const mappedBook = res.map((item, index) => {
-            return {key: index, title: item.title, author: item.author, cover: item.cover, url: item.url, tags: item.tags}
+            return {id: item.$id, key: index, title: item.title, author: item.author, cover: item.cover, url: item.url, tags: item.tags}
         })
 
 
@@ -129,7 +130,8 @@ export default function IndexPage() {
           {
             books.length < 1 ? "Nothing to see here..." :
             books.map(book => (
-            <BookCard 
+            <BookCard
+              id={book.id}
               key={book.key} 
               title={book.title}
               cover={book.cover}
