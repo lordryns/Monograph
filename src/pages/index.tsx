@@ -5,7 +5,7 @@ import { databases, databaseId, bookCollectionId } from "@/appwrite_client/init_
 import BookCard from "@/components/bookCard.tsx";
 
 interface Book {
-  id: number;
+  id: string;
   key: number,
   title: string,
   author: string, 
