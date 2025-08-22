@@ -110,7 +110,9 @@ export default function IndexPage() {
 
         {/* Books Grid */}
 <section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
-          {books.map(book => (
+          {
+            books.length < 1 ? "Nothing to see here..." :
+            books.map(book => (
             <BookCard 
               key={book.key} 
               title={book.title}
@@ -118,7 +120,9 @@ export default function IndexPage() {
               author={book.author}
               download_link={book.url} 
             />
-          ))}
+          )
+            )
+          }
         </section>
       </main>
 
