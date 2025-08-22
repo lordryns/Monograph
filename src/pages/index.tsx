@@ -27,8 +27,8 @@ export default function IndexPage() {
         })
 
 
-          updateBooks(mappedBook);
-          setAllBooks(mappedBook);
+          updateBooks(mappedBook.slice().reverse());
+          setAllBooks(mappedBook.slice().reverse());
       })
       .catch(err => console.log(err));
 
