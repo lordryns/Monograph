@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import {addToast, Button} from "@heroui/react";
 import { databases, databaseId, bookCollectionId } from "@/appwrite_client/init_client.ts"
 
 export default function BookCard(props: any) {
@@ -27,6 +27,14 @@ export default function BookCard(props: any) {
         );
       })
       .catch(err => console.log(err));
+  
+      addToast({
+            title: "Downloading...",
+            description: `Downloading ${props.title}...`,
+            timeout: 3000,
+            shouldShowTimeoutProgress: true,
+            color: "success"
+          });
     window.open(props.download_link);
   };
 
