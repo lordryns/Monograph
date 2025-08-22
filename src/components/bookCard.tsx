@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {addToast, Button} from "@heroui/react";
+import { addToast } from "@heroui/react";
 import { databases, databaseId, bookCollectionId } from "@/appwrite_client/init_client.ts"
 
 export default function BookCard(props: any) {
