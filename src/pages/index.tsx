@@ -112,7 +112,7 @@ export default function IndexPage() {
       {/* Footer - Apple style minimalism */}
       <footer className="bg-gray-50 mt-20 py-10">
         <div className="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">
-          <p>© 2023 Monograph. All rights reserved.</p>
+          <p>Want to contribute? Find me on <a href="https://github.com/lordryns" target="_blank">Github</a> or <a href="https://x.com/lordryns" target="_blank">X (twitter)</a> @lordryns.</p>
         </div>
       </footer>
     </div>
