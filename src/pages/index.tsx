@@ -48,7 +48,7 @@ export default function IndexPage() {
     if (searchQuery.length < 1) {
       updateBooks(preSearchBooks);
     } else {
-    const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchQuery.toLowerCase()) || book.author.toLowerCase().includes(searchQuery.toLowerCase()));
     updateBooks(filteredBooks);
     }
 
