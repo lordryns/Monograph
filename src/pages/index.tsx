@@ -14,8 +14,9 @@ interface Book {
 }
 
 export default function IndexPage() {
+ const [allBooks, setAllBooks] = useState<Book[]>([]);
  const [books, updateBooks] = useState<Book[]>([]);
-
+  const [bookTrigger, setBookTrigger] = useState(0);
   useEffect(() => {
     databases.listDocuments(databaseId, bookCollectionId)
       .then(res => res.documents)
@@ -26,18 +27,30 @@ export default function IndexPage() {
 
 
           updateBooks(mappedBook);
+          setAllBooks(mappedBook);
       })
       .catch(err => console.log(err));
 
-  }, [])
+  }, [bookTrigger])
+
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   //const [sortBy, setSortBy] = useState("Most Recent");
   
     // Categories
-  const categories = ["All", "Political", "Science Fiction", "Mystery", "Biography", "History", "Technology", "Philosophy"];
-  
+  const categories = ["All", "Political", "Fiction", "Mystery", "Biography", "History", "Technology", "Philosophy"];
+
+  useEffect(() => {
+    if (selectedCategory === "All") {
+      setBookTrigger(bookTrigger + 1);
+    } else {
+
+      const filteredBooks = allBooks.filter(book => Array.isArray(book.tags) && book.tags.some(tag => tag.charAt(0).toUpperCase() + tag.slice(1) === selectedCategory))
+      updateBooks(filteredBooks);
+    }
+
+  }, [selectedCategory])
   return (
     <div className="min-h-screen bg-white">
       <header className="bg-white">
