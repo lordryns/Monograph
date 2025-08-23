@@ -27,9 +27,10 @@ export default function BookCard(props: any) {
         );
       })
       .catch(err => console.log(err));
-  
+ 
     window.open(props.download_link);
-      addToast({
+    props.triggerAtDownload();  
+    addToast({
             title: "Downloading...",
             description: `Downloading ${props.title}...`,
             timeout: 4000,

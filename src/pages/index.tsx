@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { databases, databaseId, bookCollectionId } from "@/appwrite_client/init_client.ts"
 
 import BookCard from "@/components/bookCard.tsx";
-
+import { Alert } from "@heroui/react";
 interface Book {
   id: string;
   key: number,
@@ -15,9 +15,12 @@ interface Book {
 }
 
 export default function IndexPage() {
- const [allBooks, setAllBooks] = useState<Book[]>([]);
+ const [alertIsVisible, setAlertIsVisible] = useState(false);
+
+  const [allBooks, setAllBooks] = useState<Book[]>([]);
  const [preSearchBooks, updatePreSearchBooks] = useState<Book[]>([]);
  const [books, updateBooks] = useState<Book[]>([]);
+  
   useEffect(() => {
     databases.listDocuments(databaseId, bookCollectionId)
       .then(res => res.documents)
@@ -118,7 +121,18 @@ export default function IndexPage() {
           
                 </div>
 
-        {/* Results count */}
+
+        <Alert
+          color="success"
+          description="Book is being downloaded!"
+          isVisible={ alertIsVisible }
+          title="Downloading book..."
+          variant="faded"
+          onClose={() => {setAlertIsVisible(false)}}
+        />
+
+
+                  {/* Results count */}
         <div className="mb-8 flex justify-between items-center">
           <h3 className="text-lg font-regular text-gray-800">
             {selectedCategory === "All" ? "All Books" : selectedCategory}
@@ -136,7 +150,10 @@ export default function IndexPage() {
               title={book.title}
               cover={book.cover}
               author={book.author}
-              download_link={book.url} 
+              download_link={book.url}
+              triggerAtDownload = {() => {
+                    setAlertIsVisible(true);
+                  }}
             />
           )
             )
